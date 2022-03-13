@@ -1,6 +1,6 @@
 <center> <h1>HBNB - The Console</h1> </center>
 
-This repository contains the initial stage of a student project to build a clone of the AirBnB website. This stage implements a backend interface, or console, to manage program data. Console commands allow the user to create, update, and destroy objects, as well as manage file storage. Using a system of JSON serialization/deserialization, storage is persistent between sessions.
+This repositorys contains the initial stage of a student project to build a clone of the AirBnB website. This stage implements a backend interface, or console, to manage program data. Console commands allow the user to create, update, and destroy objects, as well as manage file storage. Using a system of JSON serialization/deserialization, storage is persistent between sessions.
 
 ---
 
@@ -97,7 +97,7 @@ Usage: destroy <class_name> <_id>
 ** no instance found **
 (hbnb)   
 ```
-###### Example 3: Update an object
+###### Example 3: Updat an object
 Usage: update <class_name> <_id>
 ```
 (hbnb) update BaseModel b405fc64-9724-498f-b405-e4071c3d857f first_name "person"
