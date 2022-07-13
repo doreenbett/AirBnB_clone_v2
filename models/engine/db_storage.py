@@ -55,15 +55,15 @@ class DBStorage:
                 cls = eval(cls)
             objs = self.__session.query(cls)
         return {"{}.{}".format(type(o).__name__, o.id): o for o in objs}
-    
+
     def new(self, obj):
         """Add obj to the current database session."""
         self.__session.add(obj)
-    
+
     def save(self):
         """Commit all changes to the current database session."""
         self.__session.commit()
-    
+
     def delete(self, obj=None):
         """Delete obj from the current database session."""
         if obj is not None:
@@ -76,6 +76,7 @@ class DBStorage:
                                        expire_on_commit=False)
         Session = scoped_session(session_factory)
         self.__session = Session()
+
     def close(self):
         """Close the working SQLAlchemy session."""
         self.__session.close()
