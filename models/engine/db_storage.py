@@ -17,7 +17,6 @@ from sqlalchemy.orm import sessionmaker
 
 class DBStorage:
     """Represents a database storage engine.
-
     Attributes:
         __engine (sqlalchemy.Engine): The working SQLAlchemy engine.
         __session (sqlalchemy.Session): The working SQLAlchemy session.
@@ -25,6 +24,7 @@ class DBStorage:
 
     __engine = None
     __session = None
+
     def __init__(self):
         """Initialize a new DBStorage instance."""
         self.__engine = create_engine("mysql+mysqldb://{}:{}@{}/{}".
@@ -35,6 +35,7 @@ class DBStorage:
                                       pool_pre_ping=True)
         if getenv("HBNB_ENV") == "test":
             Base.metadata.drop_all(self.__engine)
+
     def all(self, cls=None):
         """Query on the curret database session all objects of the given class.
         If cls is None, queries all types of objects.
@@ -42,25 +43,26 @@ class DBStorage:
             Dict of queried classes in the format <class name>.<obj id> = obj.
         """
         if cls is None:
-	            objs = self.__session.query(State).all()
-	                   objs.extend(self.__session.query(City).all())
-	                   objs.extend(self.__session.query(User).all())
-	                   objs.extend(self.__session.query(Place).all())
-	                   objs.extend(self.__session.query(Review).all())
-	                   objs.extend(self.__session.query(Amenity).all())
+            objs = self.__session.query(State).all()
+            objs.extend(self.__session.query(City).all())
+            objs.extend(self.__session.query(User).all())
+            objs.extend(self.__session.query(Place).all())
+            objs.extend(self.__session.query(Review).all())
+            objs.extend(self.__session.query(Amenity).all())
         else:
             if type(cls) == str:
                 cls = eval(cls)
             objs = self.__session.query(cls)
         return {"{}.{}".format(type(o).__name__, o.id): o for o in objs}
+
     def new(self, obj):
         """Add obj to the current database session."""
         self.__session.add(obj)
-    
+
     def save(self):
         """Commit all changes to the current database session."""
         self.__session.commit()
-    
+
     def delete(self, obj=None):
         """Delete obj from the current database session."""
         if obj is not None:
@@ -73,6 +75,7 @@ class DBStorage:
                                        expire_on_commit=False)
         Session = scoped_session(session_factory)
         self.__session = Session()
+
     def close(self):
         """Close the working SQLAlchemy session."""
         self.__session.close()
