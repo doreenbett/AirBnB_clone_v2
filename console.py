@@ -113,14 +113,23 @@ class HBNBCommand(cmd.Cmd):
         """ Overrides the emptyline method of CMD """
         pass
 
+<<<<<<< HEAD
     def do_create(self, line):
         """ Create create <class> <key 1>=<value 2> <key 2>=<value 2> ...
         Create a new class instance with given keys/values and print its id.
+=======
+    def do_create(self, args):
+        """Creates a new instance of BaseModel, saves it
+        Exceptions:
+            SyntaxError: when there is no args given
+            NameError: when there is no object that has the name
+>>>>>>> f8c53cad57740639d51ae9919507ed3970169d12
         """
         try:
             if not line:
                 raise SyntaxError()
             my_list = line.split(" ")
+<<<<<<< HEAD
 
             kwargs = {}
             for i in range(1, len(my_list)):
@@ -141,6 +150,33 @@ class HBNBCommand(cmd.Cmd):
                 storage.new(obj)
             print(obj.id)
             obj.save()
+=======
+            obj = eval("{}()".format(my_list[0]))
+            # key=value parameters validation
+            if (len(my_list) > 1):
+                dic = {}
+                for arg in range(1, len(my_list)):
+                    k_v = my_list[arg].split("=")
+                    dic[k_v[0]] = k_v[1]
+                for key, value in dic.items():
+                    if (value.startswith('"')):
+                        # Slicing the string withouth ", is the same
+                        # like value[1:len - 1]
+                        value = value[1:-1]
+                        value = value.replace('"', '\\')
+                        value = value.replace('_', ' ')
+                    elif "." in value:
+                        value = float(value)
+                    else:
+                        value = int(value)
+                    setattr(obj, key, value)
+            obj.save()
+            print("{}".format(obj.id))
+        except SyntaxError:
+            print("** class name missing **")
+        except NameError:
+            print("** class doesn't exist **")
+>>>>>>> f8c53cad57740639d51ae9919507ed3970169d12
 
     def help_create(self):
         """ Help information for the create method """
