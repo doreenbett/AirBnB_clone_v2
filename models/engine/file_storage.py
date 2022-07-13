@@ -14,6 +14,7 @@ from models.user import User
 classes = {"Amenity": Amenity, "BaseModel": BaseModel, "City": City,
            "Place": Place, "Review": Review, "State": State, "User": User}
 
+
 class FileStorage:
     """This class manages storage of hbnb models in JSON format"""
     # string - path to the JSON file
@@ -37,7 +38,7 @@ class FileStorage:
             for key, val in temp.items():
                 temp[key] = val.to_dict()
             json.dump(temp, f)
-									     
+
     def reload(self):
         """deserializes the JSON file to __objects"""
         try:
@@ -47,6 +48,7 @@ class FileStorage:
                 self.__objects[key] = classes[jo[key]["__class__"]](**jo[key])
         except:
             pass
+    
     def delete(self, obj=None):
         """delete obj from __objects if it’s inside"""
         if obj is not None:
