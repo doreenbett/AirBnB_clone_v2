@@ -74,19 +74,6 @@ class HBNBCommand(cmd.Cmd):
         except NameError:
             print("** class doesn't exist **")
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-    def do_create(self, line):
-        """ Create create <class> <key 1>=<value 2> <key 2>=<value 2> ...
-        Create a new class instance with given keys/values and print its id.
-=======
-    def do_create(self, args):
-        """Creates a new instance of BaseModel, saves it
-        Exceptions:
-            SyntaxError: when there is no args given
-            NameError: when there is no object that has the name
->>>>>>> f8c53cad57740639d51ae9919507ed3970169d12
-=======
     def do_show(self, line):
         """Prints the string representation of an instance
         Exceptions:
@@ -94,57 +81,11 @@ class HBNBCommand(cmd.Cmd):
             NameError: when there is no object taht has the name
             IndexError: when there is no id given
             KeyError: when there is no valid id given
->>>>>>> 9cafeb5f22e89f5fc90459d938c58f98dceb1a93
         """
         try:
             if not line:
                 raise SyntaxError()
             my_list = line.split(" ")
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-            kwargs = {}
-            for i in range(1, len(my_list)):
-                key, value = tuple(my_list[i].split("="))
-                if value[0] == '"':
-                    value = value.strip('"').replace("_", " ")
-                else:
-                    try:
-                        value = eval(value)
-                    except (SyntaxError, NameError):
-                        continue
-                kwargs[key] = value
-
-            if kwargs == {}:
-                obj = eval(my list[0])()
-            else:
-                obj = eval(my_list[0])()
-                storage.new(obj)
-            print(obj.id)
-            obj.save()
-=======
-            obj = eval("{}()".format(my_list[0]))
-            # key=value parameters validation
-            if (len(my_list) > 1):
-                dic = {}
-                for arg in range(1, len(my_list)):
-                    k_v = my_list[arg].split("=")
-                    dic[k_v[0]] = k_v[1]
-                for key, value in dic.items():
-                    if (value.startswith('"')):
-                        # Slicing the string withouth ", is the same
-                        # like value[1:len - 1]
-                        value = value[1:-1]
-                        value = value.replace('"', '\\')
-                        value = value.replace('_', ' ')
-                    elif "." in value:
-                        value = float(value)
-                    else:
-                        value = int(value)
-                    setattr(obj, key, value)
-            obj.save()
-            print("{}".format(obj.id))
-=======
             if my_list[0] not in self.__classes:
                 raise NameError()
             if len(my_list) < 2:
@@ -155,41 +96,11 @@ class HBNBCommand(cmd.Cmd):
                 print(objects[key])
             else:
                 raise KeyError()
->>>>>>> 9cafeb5f22e89f5fc90459d938c58f98dceb1a93
         except SyntaxError:
             print("** class name missing **")
         except NameError:
             print("** class doesn't exist **")
-<<<<<<< HEAD
->>>>>>> f8c53cad57740639d51ae9919507ed3970169d12
-
-    def help_create(self):
-        """ Help information for the create method """
-        print("Creates a class of any type")
-        print("[Usage]: create <className>\n")
-
-    def do_show(self, args):
-        """ Method to show an individual object """
-        new = args.partition(" ")
-        c_name = new[0]
-        c_id = new[2]
-
-        # guard against trailing args
-        if c_id and ' ' in c_id:
-            c_id = c_id.partition(' ')[0]
-
-        if not c_name:
-            print("** class name missing **")
-            return
-
-        if c_name not in HBNBCommand.classes:
-            print("** class doesn't exist **")
-            return
-
-        if not c_id:
-=======
         except IndexError:
->>>>>>> 9cafeb5f22e89f5fc90459d938c58f98dceb1a93
             print("** instance id missing **")
         except KeyError:
             print("** no instance found **")
