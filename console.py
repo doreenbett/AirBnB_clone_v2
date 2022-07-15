@@ -24,9 +24,6 @@ class HBNBCommand(cmd.Cmd):
         """Ignores empty spaces"""
         pass
 
-<<<<<<< HEAD
-    def do_create(self, args):
-=======
     def do_quit(self, line):
         """Quit command to exit the program"""
         return True
@@ -36,7 +33,6 @@ class HBNBCommand(cmd.Cmd):
         return True
 
     def do_create(self, line):
->>>>>>> dba9ef162804cef8b527240c66401a56a94722d4
         """Creates a new instance of BaseModel, saves it
         Exceptions:
             SyntaxError: when there is no args given
